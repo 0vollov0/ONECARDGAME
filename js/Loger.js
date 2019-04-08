@@ -20,7 +20,7 @@ function Loger() {
     document.getElementById("log").append(playerId + " 님이 고인이 되셨습니다.\n");
   };
   this.displayWinner = function(playerId){
-    document.getElementById("display-winner").innerHTML = playerId +"님이 우승하셨습니다.";
+    document.getElementById("display-winner").innerHTML ="<h1>"+playerId +"님이 우승하셨습니다.</h1>";
   };
   this.displayCrruntTurn = function(playerId) {
     document.getElementById("current-turn").innerHTML = "<h1>"+playerId + "님의 차례입니다.</h1>";
