@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>javascript::ONECARD GAME::</title>
+  <link rel="stylesheet" href="css/css.css">
+</head>
+
+<body>
+  <div id="display-winner">
+    <h1></h1>
+  </div>
+  <div id="game-field">
+    <div id="top">
+      <div id="top-profile">
+      </div>
+      <div id="top-trumpcard-field">
+      </div>
+    </div>
+    <div id="center">
+      <div id="left">
+        <div id="left-profile">
+        </div>
+        <div id="left-trumpcard-field">
+        </div>
+      </div>
+      <div id="log-textarea-field">
+        <textarea readonly rows="8" cols="80" id="log"></textarea>
+      </div>
+      <div id="deck-field">
+        <img src="image/trumpcard/trumpcard.png" id="deck">
+        <img src="image/trumpcard/trumpcard.png" id="dummy-deck">
+      </div>
+      <div id="current-turn"></div>
+      <div id="right">
+        <div id="right-profile">
+        </div>
+        <div id="right-trumpcard-field">
+        </div>
+      </div>
+    </div>
+    <div id="bottom">
+      <div id="reset"><button type="button" name="button" class="btn" id="reset-button"><span>Reset</span></button></div>
+      <div id="bottom-trumpcard-field">
+      </div>
+      <div id="start"><button type="button" name="button" class="btn" id="start-button"><span>GameStart</span></button></div>
+    </div>
+  </div>
+</body>
+<script type="text/javascript" src="js/doubleLinkedList.js"></script>
+<script type="text/javascript" src="js/Loger.js"></script>
+<script type="text/javascript" src="js/Dealer.js"></script>
+<script type="text/javascript" src="js/Deck.js"></script>
+<script type="text/javascript" src="js/Player.js"></script>
+<script type="text/javascript" src="js/javascript.js"></script>
+
+</html>
