@@ -1,0 +1,227 @@
+*{
+  font-family: 'Do Hyeon', sans-serif;
+
+}
+body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+
+}
+
+h1{
+  color: white;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+textarea{
+  color: white;
+  background-image: url( "../image/background/background.jpg" );
+}
+
+#game-field{
+  width: 1280px;
+  height: 920px;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-image: url( "../image/background/background.jpg" );
+}
+
+#top{
+  width: 1280px;
+  height: 260px;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+}
+
+#center{
+  width: 1280px;
+  height: 540px;
+  position: absolute;
+  top: 29%;
+  left: 0%;
+}
+
+#left{
+  width: 300px;
+  height: 535px;
+  position: absolute;
+}
+
+#right{
+  width: 300px;
+  height: 535px;
+  position: absolute;
+  top: 0%;
+  left: 76%;
+}
+
+#bottom{
+  width: 1280px;
+  height: 110px;
+  position: absolute;
+  top: 88%;
+  left: 0%;
+}
+
+#top-profile{
+  width: 300px;
+  height: 150px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#left-profile{
+  width: 49%;
+  height: 100%;
+  text-align: center;
+  float: left;
+}
+
+#left-profile img{
+  position: relative;
+  top: 50%;
+  transform: translate(0%,-50%);
+}
+
+#left-profile span{
+  position: absolute;
+  left: 18%;
+  top: 30%;
+}
+
+
+#right-profile{
+  width: 49%;
+  height: 100%;
+  text-align: center;
+  float: right;
+}
+
+#right-profile img{
+  position: relative;
+  top: 50%;
+  transform: translate(0%,-50%);
+}
+
+#right-profile span{
+  position: absolute;
+  float: right;
+  right: 18%;
+  top: 30%;
+}
+
+
+#bottom-profile{
+  width: 300px;
+  height: 90px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#top-trumpcard-field{
+  width: 900px;
+  height: 100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#left-trumpcard-field{
+  width: 49%;
+  height: 100%;
+  padding-top: 5px;
+  text-align: center;
+  float: left;
+}
+
+#right-trumpcard-field{
+  width: 49%;
+  height: 100%;
+  padding-top: 5px;
+  text-align: center;
+  float: right;
+}
+
+#bottom-trumpcard-field{
+  width: 900px;
+  height: 100px;
+  margin: 0 auto;
+  text-align: center;
+  float: left;
+}
+
+#reset{
+  width: 14%;
+  height: 100px;
+  float: left;
+}
+
+#start{
+  width: 14%;
+  height: 100px;
+  float: right;
+}
+
+#reset-button{
+
+}
+
+#start-button{
+
+}
+
+#deck-field{
+  text-align: center;
+  width: 200px;
+  height: 105px;
+  float: left;
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+#log-textarea-field{
+  position: relative;
+  top:5%;
+  text-align: center;
+}
+
+#log{
+  text-align: center;
+}
+
+#current-turn{
+  position: relative;
+  top:50%;
+  text-align: center;
+}
+
+#display-winner{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 100;
+}
+.btn{
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  border:0;
+  background: none;
+  display: block;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 40px;
+  width: 140px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
