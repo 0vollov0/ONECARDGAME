@@ -1,7 +1,7 @@
 # ONECARDGAME
 자바스크립트로 구현한 원카드 게임(싱글 플레이)입니다.
 
-<iframe src="https://player.vimeo.com/video/329556812?byline=0&portrait=0" width="640" height="333" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
 
 # 게임 규칙
 
