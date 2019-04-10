@@ -1,6 +1,9 @@
 
 function Deck() {}
 Deck.prototype.deck = [];
+Deck.prototype.getTop = function() {
+  return this.deck[this.deck.length - 1];
+};
 Deck.prototype.Suffle = function() {
   for (var i = 0; i < this.deck.length; ++i) {
     var dest = Math.floor(Math.random() * this.deck.length);
@@ -10,18 +13,8 @@ Deck.prototype.Suffle = function() {
     this.deck[dest] = temp;
   }
 };
-Deck.prototype.getTop = function() {
-  return this.deck[this.deck.length - 1];
-};
 
 function TrumpDeck() {
-  /*
-  document.getElementById("deck").addEventListener('click', function() {
-    if (this.dealer.getCurrentTurn().data instanceof User) {
-      this.dealer.getCurrentTurn().data.draw();
-      this.dealer.nextTurn(1);
-    }
-  });*/
   this.dealer = null;
   this.dummyDeck = null;
   this.attackStack = 1;
@@ -49,7 +42,6 @@ function TrumpDeck() {
       }
       this.deck.push(k);
     }
-
   };
   this.draw = function() {
     var drawcardlist = [];

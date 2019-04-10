@@ -2,22 +2,19 @@ function Player(id, trumpDeck, dummyDeck, loger) {
   this.id = id;
   this.trumpDeck = trumpDeck;
   this.dummyDeck = dummyDeck;
-  this.turn = false;
-  this.sucessOneCard = false;
-  this.playerCardList = [];
-  this.repaintCardField = function() {};
   this.loger = loger;
   this.alive = true;
+  this.turn = false;
+  this.playerCardList = [];
 }
 
 Player.prototype.id = null;
 Player.prototype.trumpDeck = null;
 Player.prototype.dummyDeck = null;
-Player.prototype.turn = false;
-Player.prototype.sucessOneCard = false;
 Player.prototype.loger = null;
-Player.prototype.playerCardList = [];
 Player.prototype.alive = true;
+Player.prototype.turn = false;
+Player.prototype.playerCardList = [];
 Player.prototype.playCard = function(cardNumber) {};
 Player.prototype.repaintCardField = function() {};
 Player.prototype.sortCardId = function(cardId) {
@@ -89,7 +86,6 @@ Player.prototype.switchCardId = function(cardId) {
     case 7:
       if (this instanceof User) {
         var flag = false;
-        //var style = "";
         while (!flag) {
           style = prompt("클로버 | 다이아 | 하트 | 스페이드 중 하나를 입력하세요.");
           if (style == "클로버" || style == "다이아" || style == "하트" || style == "스페이드" || style == null) {
@@ -123,19 +119,15 @@ Player.prototype.switchCardId = function(cardId) {
       return 1;
       break;
     case 11:
-      //dealer.nextTurn(2);
       return 2;
       break;
     case 12:
-      //dealer.nextTurn(0);
       return 0;
       break;
     case 13:
-      //dealer.nextTurn(-1);
       return -1;
       break;
     default:
-      //dealer.nextTurn(1);
       return 1;
       break;
   }
@@ -143,25 +135,10 @@ Player.prototype.switchCardId = function(cardId) {
 
 Player.prototype.draw = function() {
   if (this.turn == true) {
-    //document.getElementById("draw-motion").innerHTML = "<img src='image/trumpcard/trumpcard.png' class='user-draw-motion'>";
-    //setTimeout(this.repaintCardField(),3000);
     this.loger.appendDrawLog(this.id, this.trumpDeck.getAttackStack());
     this.playerCardList = this.playerCardList.concat(this.trumpDeck.draw());
     this.repaintCardField();
-    //console.log(this);
-    //setTimeout(this.drawMotionTimer(this),2000);
-    //document.getElementById("draw-motion").innerHTML = "";
   }
-};
-Player.prototype.drawMotionTimer = function(player) {
-  /*
-  var player = player;
-  return function() {
-    document.getElementById("draw-motion").innerHTML = "";
-    player.playerCardList = player.playerCardList.concat(player.trumpDeck.draw());
-    player.repaintCardField();
-  };
-  */
 };
 Player.prototype.setTurn = function(boolean) {
   this.turn = boolean;
@@ -169,7 +146,9 @@ Player.prototype.setTurn = function(boolean) {
 Player.prototype.setOneCard = function(boolean) {
   this.sucessOneCard = boolean;
 };
-Player.prototype.screamOneCard = function() {};
+Player.prototype.die = function() {
+  this.alive=false;
+};
 
 function User(id, trumpDeck, dummyDeck, loger) {
   this.id = id;
@@ -178,18 +157,9 @@ function User(id, trumpDeck, dummyDeck, loger) {
   this.loger = loger;
   this.fieldId = document.getElementById("bottom-trumpcard-field");
 }
-Player.prototype.die = function() {
-  this.alive=false;
-};
 User.prototype = new Player();
 User.prototype.playCard = function(cardId) {
   if (this.turn == true) {
-    /*
-    if (this.playerCardList.length == 1 && this.sucessOneCard == false) {
-      console.log("원카드");
-      return;
-    }
-    */
     var resultTimes = this.sortCardId(cardId);
     if (resultTimes != null) {
       this.playerCardList.splice(this.playerCardList.indexOf(cardId), 1);
@@ -223,7 +193,6 @@ User.prototype.TrumpCardAddClickEvent = function(cardId, ref) {
   document.getElementById(cardId).addEventListener('click', function() {
     ref.playCard(cardId);
   });
-  //document.getElementById(cardId).addEventListener('click', this.playCard(cardId));
 };
 
 function AI(id, trumpDeck, dummyDeck, loger) {
@@ -231,7 +200,6 @@ function AI(id, trumpDeck, dummyDeck, loger) {
   this.trumpDeck = trumpDeck;
   this.dummyDeck = dummyDeck;
   this.loger = loger;
-  //this.fieldId;
   switch (this.id) {
     case "AI_1":
       this.fieldId = document.getElementById("left-trumpcard-field");
@@ -248,11 +216,6 @@ AI.prototype = new Player();
 AI.prototype.playCard = function() {
   var cardId = null;
   for (var i = 0; i < this.playerCardList.length; i++) {
-    /*
-    if (this.playerCardList.length == 1 && this.sucessOneCard == false) {
-      console.log("원카드");
-      break;
-    }*/
     var resultTimes = this.sortCardId(this.playerCardList[i]);
     if (resultTimes != null) {
       this.loger.appendPlayCardLog(this.id, this.playerCardList[i]);
@@ -261,15 +224,6 @@ AI.prototype.playCard = function() {
       return resultTimes;
     }
   }
-  /*
-  if (cardId != 0) {
-    this.playerCardList.splice(this.playerCardList.indexOf(cardId), 1);
-    this.repaintCardField();
-    return this.sortCardId(cardId);
-  } else {
-    this.draw();
-    return 1;
-  }*/
   this.draw();
   return 1;
 };

@@ -1,9 +1,10 @@
 function Dealer(loger) {
   this.trumpDeck = null;
+  this.loger = loger;
   this.attackStack = 0;
   this.gameOver = false;
   this.playerList = new DoubleLinkedList();
-  this.loger = loger;
+
   this.setTrumpDeck = function(trumpDeck) {
     this.trumpDeck = trumpDeck;
   };
@@ -66,7 +67,6 @@ function Dealer(loger) {
     }
     this.nextTurn(1);
   };
-  this.oneCard = function(player) {};
   this.GAMEOVER = function(){this.gameOver = true;};
 
 }
