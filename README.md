@@ -1,7 +1,11 @@
 # ONECARDGAME
 자바스크립트로 구현한 원카드 게임(싱글 플레이)입니다.
 
+Play!! <https://psk876.github.io/ONECARDGAME/>
 
+## 주의
+
+원할한 게임은 직접 다운받아서 하시길 바랍니다...
 
 # 게임 규칙
 
