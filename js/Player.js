@@ -43,10 +43,12 @@ Player.prototype.sortCardId = function(cardId) {
   } else {
     if (Math.floor(dummyDeck.getTop() / 100) == 5) {
       if (cardId == 501) {
+        this.trumpDeck.pushAttackStack(5)
         return 5;
-      }else if (cardId == 502) {
+      } else if (cardId == 502) {
+        this.trumpDeck.pushAttackStack(7)
         return 7;
-      }else{
+      } else {
         return null;
       }
     }
@@ -131,8 +133,7 @@ Player.prototype.switchCardId = function(cardId) {
       return 1;
       break;
   }
-}
-
+};
 Player.prototype.draw = function() {
   if (this.turn == true) {
     this.loger.appendDrawLog(this.id, this.trumpDeck.getAttackStack());
@@ -147,8 +148,22 @@ Player.prototype.setOneCard = function(boolean) {
   this.sucessOneCard = boolean;
 };
 Player.prototype.die = function() {
-  this.alive=false;
+  this.alive = false;
 };
+Player.prototype.decreaseCardOpacity = function(cardId){
+  var opacity = 1;
+  var timerid = setInterval(function() {
+    if (opacity <= 0) {
+      clearInterval(timerid);
+    } else {
+      opacity -= 0.01;
+      console.log(element);
+      document.getElementById(cardId).style.opacity = opacity;
+    }
+  }, 5);
+};
+
+
 
 function User(id, trumpDeck, dummyDeck, loger) {
   this.id = id;
@@ -162,12 +177,21 @@ User.prototype.playCard = function(cardId) {
   if (this.turn == true) {
     var resultTimes = this.sortCardId(cardId);
     if (resultTimes != null) {
-      this.playerCardList.splice(this.playerCardList.indexOf(cardId), 1);
-      this.repaintCardField();
-      this.loger.appendPlayCardLog(this.id, cardId);
-      dealer.nextTurn(resultTimes);
+      this.decreaseCardOpacity(cardId);
+      this.timer(this, resultTimes, cardId);
     }
   }
+};
+User.prototype.timer = function(ref, resultTimes, cardId) {
+  setTimeout(function() {
+    ref.playCardProcess(resultTimes, cardId);
+  }, 500);
+};
+User.prototype.playCardProcess = function(resultTimes, cardId) {
+  this.playerCardList.splice(this.playerCardList.indexOf(cardId), 1);
+  this.repaintCardField();
+  this.loger.appendPlayCardLog(this.id, cardId);
+  dealer.nextTurn(resultTimes);
 };
 User.prototype.repaintCardField = function() {
   var innerhtml = "";
@@ -185,15 +209,27 @@ User.prototype.repaintCardField = function() {
 };
 User.prototype.TrumpCardAddEventListener = function(length) {
   for (var i = 0; i < length; i++) {
-    this.TrumpCardAddClickEvent(this.playerCardList[i], this);
+    this.TrumpCardClickEvent(this.playerCardList[i], this);
+    this.TrumpCardMouseInOutEvent(this.playerCardList[i]);
   }
 };
 
-User.prototype.TrumpCardAddClickEvent = function(cardId, ref) {
+User.prototype.TrumpCardClickEvent = function(cardId, ref) {
   document.getElementById(cardId).addEventListener('click', function() {
     ref.playCard(cardId);
   });
 };
+
+User.prototype.TrumpCardMouseInOutEvent = function(cardId) {
+  document.getElementById(cardId).addEventListener('mouseover', function() {
+    document.getElementById(cardId).style.border = "1.5px solid #EFFFBD";
+  });
+  document.getElementById(cardId).addEventListener('mouseout', function() {
+    document.getElementById(cardId).style.border = "";
+  });
+};
+
+
 
 function AI(id, trumpDeck, dummyDeck, loger) {
   this.id = id;
@@ -214,35 +250,47 @@ function AI(id, trumpDeck, dummyDeck, loger) {
 }
 AI.prototype = new Player();
 AI.prototype.playCard = function() {
-  var cardId = null;
-  for (var i = 0; i < this.playerCardList.length; i++) {
-    var resultTimes = this.sortCardId(this.playerCardList[i]);
+  var i,resultTimes = null;
+  for (i = 0; i < this.playerCardList.length; i++) {
+    resultTimes = this.sortCardId(this.playerCardList[i]);
     if (resultTimes != null) {
-      this.loger.appendPlayCardLog(this.id, this.playerCardList[i]);
-      this.playerCardList.splice(this.playerCardList.indexOf(this.playerCardList[i]), 1);
-      this.repaintCardField();
-      return resultTimes;
+      break;
     }
   }
-  this.draw();
-  return 1;
+  if (resultTimes == null) {
+      this.draw();
+  }else{
+    this.decreaseCardOpacity(this.playerCardList[i]);
+    this.timer(this,resultTimes,this.playerCardList[i]);
+  }
+  return resultTimes;
+};
+AI.prototype.timer = function(ref, resultTimes, cardId) {
+  setTimeout(function() {
+    ref.playCardProcess(resultTimes, cardId);
+  }, 500);
+};
+AI.prototype.playCardProcess = function(resultTimes, cardId){
+  this.loger.appendPlayCardLog(this.id, cardId);
+  this.playerCardList.splice(this.playerCardList.indexOf(cardId), 1);
+  this.repaintCardField();
 };
 AI.prototype.repaintCardField = function() {
   var innerhtml = "";
   for (var i = 0; i < this.playerCardList.length; i++) {
     if (this.id == "AI_2") {
       if (this.playerCardList.length > 11) {
-        innerhtml += "<img src=image/trumpcard/trumpcard.png style= height:70%;>";
+        innerhtml += "<img src=image/trumpcard/trumpcard.png style= height:70%; id='"+this.playerCardList[i]+"'>";
       } else {
-        innerhtml += "<img src=image/trumpcard/trumpcard.png>";
+        innerhtml += "<img src=image/trumpcard/trumpcard.png id='"+this.playerCardList[i]+"'>";
       }
     } else {
       if (this.playerCardList.length <= 7) {
-        innerhtml += "<img src=image/trumpcard/trumpcardtransform.png>";
+        innerhtml += "<img src=image/trumpcard/trumpcardtransform.png id='"+this.playerCardList[i]+"'>";
       } else if (this.playerCardList.length > 7 && this.playerCardList.length <= 9) {
-        innerhtml += "<img src=image/trumpcard/trumpcardtransform.png style= width:50%;>";
+        innerhtml += "<img src=image/trumpcard/trumpcardtransform.png style= width:50%; id='"+this.playerCardList[i]+"'>";
       } else if (this.playerCardList.length > 9) {
-        innerhtml += "<img src=image/trumpcard/trumpcardtransform.png style= width:45%;>";
+        innerhtml += "<img src=image/trumpcard/trumpcardtransform.png style= width:45%; id='"+this.playerCardList[i]+"'>";
       }
     }
   }
