@@ -5,7 +5,7 @@
 [![Video Label](https://i.vimeocdn.com/video/776961169_640x360.jpg)](https://vimeo.com/331539320) 
 
 ## Play!!
-<https://psk876.github.io/ONECARDGAME/>
+<https://0vollov0.github.io/ONECARDGAME/>
 
 ## 주의
 
