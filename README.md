@@ -1,9 +1,6 @@
 # ONECARDGAME
 자바스크립트로 구현한 원카드 게임(싱글 플레이)입니다.
 
-## 영상
-[![Video Label](https://i.vimeocdn.com/video/776961169_640x360.jpg)](https://vimeo.com/331539320) 
-
 ## Play!!
 <https://0vollov0.github.io/ONECARDGAME/>
 
